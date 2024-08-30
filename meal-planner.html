@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .step {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            background-color: #f1f1f1;
+            color: #4CAF50;
+            font-weight: bold;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .step.active {
+            border: 2px solid #4CAF50;
+            background-color: #ffffff;
+        }
+
+        form {
+            background-color: #f1f8e9;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        select, input[type="radio"], input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .cta-button {
+            background-color: #26A69A;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #00796B;
+        }
+
+        .back-button {
+            background-color: #f1f1f1;
+            color: #333333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .back-button:hover {
+            background-color: #cccccc;
+        }
+
+        .radio-group {
+            text-align: left;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>SOME QUICK QUESTIONS TO GENERATE THAT AWESOME MEAL PLAN ..</h2>
+        <div class="step-indicator">
+            <span class="step active" onclick="navigateToStep(0)">1</span>
+            <span class="step" onclick="navigateToStep(1)">2</span>
+            <span class="step" onclick="navigateToStep(2)">3</span>
+            <span class="step" onclick="navigateToStep(3)">4</span>
+            <span class="step" onclick="navigateToStep(4)">5</span>
+        </div>
+
+        <form id="meal-planner-form">
+            <!-- Step 1 Content -->
+            <div class="step-content" style="display: block;">
+                <h3>Any dietary preferences?</h3>
+                <div class="radio-group">
+                    <label><input type="radio" name="dietary-preference" value="balanced" checked> Balanced Diet (Recommended)</label>
+                    <label><input type="radio" name="dietary-preference" value="low-carb"> Low-Carb (Less than 20% of total calories from carbs)</label>
+                    <label><input type="radio" name="dietary-preference" value="low-fat"> Low-Fat (Less than 15% of total calories from fat)</label>
+                </div>
+                <div class="button-container">
+                    <button type="button" class="back-button" id="backBtn2">Back</button>
+                    <button type="button" class="cta-button" onclick="handleNext()">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 2 Content -->
+            <div class="step-content">
+                <h3>Any health preferences?</h3>
+                <div class="radio-group">
+                    <label><input type="checkbox" name="health-preference" value="vegan"> Vegan (No meat, poultry, fish, dairy, eggs or honey)</label>
+                    <label><input type="checkbox" name="health-preference" value="vegetarian"> Vegetarian (No wheat, can have gluten though)</label>
+                    <label><input type="checkbox" name="health-preference" value="alcohol-free"> Alcohol-free (No alcohol used or contained)</label>
+                    <label><input type="checkbox" name="health-preference" value="peanut-free"> Peanut Free (No peanuts or products containing peanuts)</label>
+                </div>
+                <div class="button-container">
+                    <button type="button" class="back-button" onclick="handleBack()">Back</button>
+                    <button type="button" class="cta-button" onclick="handleNext()">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 3 Content -->
+            <div class="step-content">
+                <h3>Calorie intake</h3>
+                <div class="radio-group">
+                    <label><input type="radio" name="calorie-intake" value="recommended" checked> Go with recommended</label>
+                    <label><input type="radio" name="calorie-intake" value="custom"> Choose custom values</label>
+                </div>
+                <div class="button-container">
+                    <button type="button" class="back-button" onclick="handleBack()">Back</button>
+                    <button type="button" class="cta-button" onclick="handleNext()">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const steps = document.querySelectorAll(".step");
+        const stepContents = document.querySelectorAll(".step-content");
+        let currentStep = 0;
+      
+        function showStep(stepIndex) {
+          stepContents.forEach((content, index) => {
+            content.style.display = index === stepIndex ? "block" : "none";
+          });
+          steps.forEach((step, index) => {
+            step.classList.toggle("active", index === stepIndex);
+          });
+        }
+      
+        function navigateToStep(stepIndex) {
+          currentStep = stepIndex;
+          showStep(currentStep);
+        }
+      
+        function handleNext() {
+          if (currentStep < steps.length - 1) {
+            currentStep++;
+            showStep(currentStep);
+          } else {
+            alert("Meal plan completed!");
+          }
+        }
+      
+        function handleBack() {
+          if (currentStep > 0) {
+            currentStep--;
+            showStep(currentStep);
+          }
+        }
+      
+        // Initialize first step
+        showStep(currentStep);
+      });
+    </script>
+</body>
+</html>

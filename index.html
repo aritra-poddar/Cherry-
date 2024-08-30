@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshRoute - Smart Meal Planner & Grocery List Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="images/freshroute.jpg" alt="FreshRoute Logo" class="logo">
+                <h1>FreshRoute</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="meal-planner.html">Meal Planner</a></li>
+                    <li><a href="#grocery-list">Grocery List</a></li>
+                    <li><a href="#recipes">Recipes</a></li>
+                    <li><a href="#user">User</a></li>
+                    <li><a href="#" id="login-link">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section-light-green card">
+            <h2>Your One-Stop Solution for Meal Planning</h2>
+            <p>Plan your meals, generate grocery lists, and stay within your budget with ease.</p>
+            <a href="#meal-planner" class="cta-button">Start Planning</a>
+        </section>
+
+        <!-- Subscription Plans Section -->
+        <section id="subscriptions" class="section-light-green card">
+            <h2>Choose Your Subscription Plan</h2>
+            <div class="subscription-cards">
+                <!-- Free Plan -->
+                <div class="card">
+                    <h3>Free Plan</h3>
+                    <p>Basic access to meal planning and grocery list features.</p>
+                    <ul>
+                        <li>Access to basic recipes</li>
+                        <li>Grocery list generation</li>
+                        <li>Limited meal planning</li>
+                    </ul>
+                    <button class="cta-button">Select Free</button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="card premium">
+                    <h3>Premium Plan</h3>
+                    <p>Advanced features with personalized recommendations and more.</p>
+                    <ul>
+                        <li>All Free features</li>
+                        <li>Advanced meal planning</li>
+                        <li>Personalized recipes</li>
+                        <li>Nutrition tracking</li>
+                    </ul>
+                    <button class="cta-button">Select Premium</button>
+                </div>
+
+                <!-- Partner Plan -->
+                <div class="card partner">
+                    <h3>Partner Plan</h3>
+                    <p>Get everything from Premium plus partner benefits and discounts.</p>
+                    <ul>
+                        <li>All Premium features</li>
+                        <li>Partner discounts</li>
+                        <li>Priority support</li>
+                        <li>Exclusive recipes</li>
+                    </ul>
+                    <button class="cta-button">Select Partner</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meal Planner Section -->
+        <section id="meal-planner" class="section-light-green card">
+            <h2>Plan Your Meals</h2>
+            <form id="meal-planner-form">
+                <table>
+                    <tr>
+                        <td><label for="diet">Select your diet:</label></td>
+                        <td>
+                            <select id="diet" name="diet">
+                                <option value="vegetarian">Vegetarian</option>
+                                <option value="vegan">Vegan</option>
+                                <option value="keto">Keto</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="meals">Number of meals per day:</label></td>
+                        <td><input type="number" id="meals" name="meals" min="1" max="5" value="3"></td>
+                    </tr>
+                </table>
+                <button type="submit">Generate Meal Plan</button>
+            </form>
+        </section>
+
+        <!-- Grocery List Section -->
+        <section id="grocery-list" class="section-light-green card">
+            <h2>Your Grocery List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody id="grocery-list-items">
+                    <!-- Dynamically generated list items will go here -->
+                </tbody>
+            </table>
+            <button id="checkout">Proceed to Checkout</button>
+        </section>
+
+        <!-- Recipes Section -->
+        <section id="recipes" class="section-light-green card">
+            <h2>Find Recipes</h2>
+            <input type="text" id="search" placeholder="Search for a recipe">
+            <div id="recipe-results">
+                <!-- Dynamically generated recipe results will go here -->
+            </div>
+        </section>
+
+        <!-- User Profile Section (Hidden by Default) -->
+        <section id="login-section" class="hidden section-light-green card">
+            <h2>User Login</h2>
+            <form id="login-form" class="login-form">
+                <table>
+                    <tr>
+                        <td><label for="username">Username:</label></td>
+                        <td><input type="text" id="username" name="username" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Password:</label></td>
+                        <td><input type="password" id="password" name="password" required></td>
+                    </tr>
+                </table>
+                <button type="submit">Login</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 FreshRoute - Smart Meal Planner & Grocery List Generator</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
